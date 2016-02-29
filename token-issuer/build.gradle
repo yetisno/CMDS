@@ -1,0 +1,73 @@
+group 'org.yetiz.serv.mds'
+version parent.version
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = parent.sourceCompatibility
+targetCompatibility = parent.targetCompatibility
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':mds-utils')
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'net.sf.proguard:proguard-gradle:5.2.1'
+    }
+}
+
+def manifestMainClass = 'Launcher'
+def manifestImplementationVersion = "${version}"
+def manifestBuiltDate = System.currentTimeMillis()
+def manifestClassPath = configurations.compile.collect { "libs${File.separator}${it.getName()}" }.join(' ')
+
+task export_library(type: Copy) {
+    into "$buildDir${File.separator}output${File.separator}libs"
+    from configurations.runtime
+}
+
+task copy_logger_config(type: Copy) {
+    into "$buildDir${File.separator}output${File.separator}"
+    from "$projectDir${File.separator}logger.yaml"
+}
+
+jar {
+    dependsOn export_library
+    dependsOn copy_logger_config
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    destinationDir file("$buildDir${File.separator}output/")
+    from sourceSets.main.allSource
+}
+
+task manifastJar(type: Jar, dependsOn: sourcesJar) {
+    archiveName = "$baseName-$version.$extension"
+    destinationDir file("$buildDir${File.separator}output/")
+    from files(sourceSets.main.output.classesDir)
+    from files(sourceSets.main.output.resourcesDir)
+    manifest {
+        attributes 'Main-Class': manifestMainClass,
+                'Implementation-Version': manifestImplementationVersion,
+                'Built-Date': manifestBuiltDate,
+                "Class-Path": manifestClassPath
+    }
+}
+
+artifacts {
+    archives manifastJar
+}

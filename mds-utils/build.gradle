@@ -1,0 +1,84 @@
+group 'org.yetiz.serv.mds'
+version parent.version
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = parent.sourceCompatibility
+targetCompatibility = parent.targetCompatibility
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    // netty
+    compile 'io.netty:netty-all:4.1.0.CR2'
+    // for Logging - start
+    compile 'org.slf4j:slf4j-api:1.7.12'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.3'
+    compile 'org.apache.logging.log4j:log4j-api:2.3'
+    compile 'org.apache.logging.log4j:log4j-core:2.3'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.6.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.1'
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.6.1'
+    // for Logging - end
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'net.sf.proguard:proguard-gradle:5.2.1'
+    }
+}
+
+def manifestMainClass = 'Launcher'
+def manifestImplementationVersion = "${version}"
+def manifestBuiltDate = System.currentTimeMillis()
+def manifestClassPath = configurations.compile.collect { "libs${File.separator}${it.getName()}" }.join(' ')
+
+task export_library(type: Copy) {
+    into "$buildDir${File.separator}output${File.separator}libs"
+    from configurations.runtime
+}
+
+task copy_logger_config(type: Copy) {
+    into "$buildDir${File.separator}output${File.separator}"
+    from "$projectDir${File.separator}logger.yaml"
+}
+
+jar {
+    dependsOn export_library
+    dependsOn copy_logger_config
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    destinationDir file("$buildDir${File.separator}output/")
+    from sourceSets.main.allSource
+}
+
+task manifastJar(type: Jar, dependsOn: sourcesJar) {
+    archiveName = "$baseName-$version.$extension"
+    destinationDir file("$buildDir${File.separator}output/")
+    from files(sourceSets.main.output.classesDir)
+    from files(sourceSets.main.output.resourcesDir)
+    manifest {
+        attributes 'Main-Class': manifestMainClass,
+                'Implementation-Version': manifestImplementationVersion,
+                'Built-Date': manifestBuiltDate,
+                "Class-Path": manifestClassPath
+    }
+}
+
+artifacts {
+    archives manifastJar
+}

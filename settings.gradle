@@ -1,0 +1,10 @@
+rootProject.name = 'mds'
+include 'register'
+include 'mds-utils'
+include 'location-manager'
+include 'region-cooperator'
+include 'inter-region-cooperator'
+include 'service-entry'
+include 'token-issuer'
+include 'name-examiner'
+
