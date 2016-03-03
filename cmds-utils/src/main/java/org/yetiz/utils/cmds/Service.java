@@ -1,9 +1,9 @@
-package org.yetiz.utils.mds;
+package org.yetiz.utils.cmds;
 
 import java.util.Map;
 
 /**
- * mds
+ * cmds
  * Created by yeti on 16/2/29.
  */
 public interface Service {

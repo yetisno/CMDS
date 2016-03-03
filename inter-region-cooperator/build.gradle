@@ -1,4 +1,4 @@
-group 'org.yetiz.serv.mds'
+group 'org.yetiz.serv.cmds'
 version parent.version
 
 apply plugin: 'java'
@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':mds-utils')
+    compile project(':cmds-utils')
 }
 
 buildscript {

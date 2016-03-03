@@ -1,6 +1,6 @@
-rootProject.name = 'mds'
+rootProject.name = 'cmds'
 include 'register'
-include 'mds-utils'
+include 'cmds-utils'
 include 'location-manager'
 include 'region-cooperator'
 include 'inter-region-cooperator'
