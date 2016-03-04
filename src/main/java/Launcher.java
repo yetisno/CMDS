@@ -1,3 +1,5 @@
+import org.yetiz.utils.cmds.message.DefaultMessage;
+
 /**
  * cmds
  * Created by yeti on 16/2/29.
