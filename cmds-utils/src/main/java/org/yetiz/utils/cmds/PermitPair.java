@@ -2,7 +2,11 @@ package org.yetiz.utils.cmds;
 
 import org.yetiz.utils.cmds.exception.InvalidPermitNameException;
 import org.yetiz.utils.cmds.exception.InvalidValueException;
+import org.yetiz.utils.cmds.exception.ThisCannotOccurException;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -17,13 +21,14 @@ public class PermitPair {
     private static final int SERIAL_SIZE = Integer.BYTES;
     private static final int CHECKSUM_SIZE = 1;
     private static final int BLOCK2_SIZE = 64;
+    private static final int BLOCK2_SECRET_SIZE = 32;
     private String name;
     private int serial;
     private byte[] block2;
 
     public PermitPair(String name, byte[] data) {
         Block1Check(data);
-        Part1Decode(name, data);
+        part1Decode(name, data);
     }
 
     private static void Block1Check(byte[] data) {
@@ -41,7 +46,7 @@ public class PermitPair {
         }
     }
 
-    private void Part1Decode(String name, byte[] data) {
+    private void part1Decode(String name, byte[] data) {
         byte secret = 0x00;
         byte[] nameData;
         try {
@@ -70,6 +75,21 @@ public class PermitPair {
 
         for (int i = NAME_SIZE + SERIAL_SIZE; i < result.length; i++) {
             this.block2[i - (NAME_SIZE + SERIAL_SIZE)] = result[i];
+        }
+    }
+
+    public byte[] block2Decode(byte[] secret) {
+        if (secret.length != BLOCK2_SECRET_SIZE) {
+            throw new InvalidValueException();
+        }
+
+        SecretKey secretKey = new SecretKeySpec(secret, "Blowfish");
+        try {
+            Cipher blowfish = Cipher.getInstance("Blowfish");
+            blowfish.init(Cipher.DECRYPT_MODE, secretKey);
+            return blowfish.doFinal(this.block2);
+        } catch (Throwable throwable) {
+            throw new ThisCannotOccurException();
         }
     }
 
