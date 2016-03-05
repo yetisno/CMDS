@@ -1,4 +1,4 @@
-package org.yetiz.utils.cmds;
+package org.yetiz.utils.cmds.service;
 
 import java.util.Map;
 

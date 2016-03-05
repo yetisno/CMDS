@@ -13,7 +13,7 @@ message Message {
 		required bytes message = 3;
 	}
 
-	message Normal {
+	message Generic {
 		required int64 id = 1;
 		required string name = 2;
 		repeated bytes did = 3;

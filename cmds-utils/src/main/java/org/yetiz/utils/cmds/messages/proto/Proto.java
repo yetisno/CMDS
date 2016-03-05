@@ -776,8 +776,8 @@ public final class Proto {
       // @@protoc_insertion_point(class_scope:org.yetiz.utils.cmds.messages.Message.Broadcast)
     }
 
-    public interface NormalOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:org.yetiz.utils.cmds.messages.Message.Normal)
+    public interface GenericOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:org.yetiz.utils.cmds.messages.Message.Generic)
         com.google.protobuf.MessageOrBuilder {
 
       /**
@@ -826,25 +826,25 @@ public final class Proto {
       com.google.protobuf.ByteString getMessage();
     }
     /**
-     * Protobuf type {@code org.yetiz.utils.cmds.messages.Message.Normal}
+     * Protobuf type {@code org.yetiz.utils.cmds.messages.Message.Generic}
      */
-    public static final class Normal extends
+    public static final class Generic extends
         com.google.protobuf.GeneratedMessage implements
-        // @@protoc_insertion_point(message_implements:org.yetiz.utils.cmds.messages.Message.Normal)
-        NormalOrBuilder {
-      // Use Normal.newBuilder() to construct.
-      private Normal(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        // @@protoc_insertion_point(message_implements:org.yetiz.utils.cmds.messages.Message.Generic)
+        GenericOrBuilder {
+      // Use Generic.newBuilder() to construct.
+      private Generic(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
         super(builder);
         this.unknownFields = builder.getUnknownFields();
       }
-      private Normal(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+      private Generic(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-      private static final Normal defaultInstance;
-      public static Normal getDefaultInstance() {
+      private static final Generic defaultInstance;
+      public static Generic getDefaultInstance() {
         return defaultInstance;
       }
 
-      public Normal getDefaultInstanceForType() {
+      public Generic getDefaultInstanceForType() {
         return defaultInstance;
       }
 
@@ -854,7 +854,7 @@ public final class Proto {
           getUnknownFields() {
         return this.unknownFields;
       }
-      private Normal(
+      private Generic(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -918,28 +918,28 @@ public final class Proto {
       }
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return org.yetiz.utils.cmds.messages.proto.Proto.internal_static_org_yetiz_utils_cmds_messages_Message_Normal_descriptor;
+        return org.yetiz.utils.cmds.messages.proto.Proto.internal_static_org_yetiz_utils_cmds_messages_Message_Generic_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return org.yetiz.utils.cmds.messages.proto.Proto.internal_static_org_yetiz_utils_cmds_messages_Message_Normal_fieldAccessorTable
+        return org.yetiz.utils.cmds.messages.proto.Proto.internal_static_org_yetiz_utils_cmds_messages_Message_Generic_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal.class, org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal.Builder.class);
+                org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic.class, org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic.Builder.class);
       }
 
-      public static com.google.protobuf.Parser<Normal> PARSER =
-          new com.google.protobuf.AbstractParser<Normal>() {
-        public Normal parsePartialFrom(
+      public static com.google.protobuf.Parser<Generic> PARSER =
+          new com.google.protobuf.AbstractParser<Generic>() {
+        public Generic parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Normal(input, extensionRegistry);
+          return new Generic(input, extensionRegistry);
         }
       };
 
       @java.lang.Override
-      public com.google.protobuf.Parser<Normal> getParserForType() {
+      public com.google.protobuf.Parser<Generic> getParserForType() {
         return PARSER;
       }
 
@@ -1123,53 +1123,53 @@ public final class Proto {
         return super.writeReplace();
       }
 
-      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal parseFrom(
+      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal parseFrom(
+      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic parseFrom(
           com.google.protobuf.ByteString data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal parseFrom(byte[] data)
+      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic parseFrom(byte[] data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
-      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal parseFrom(
+      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic parseFrom(
           byte[] data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
-      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal parseFrom(java.io.InputStream input)
+      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic parseFrom(java.io.InputStream input)
           throws java.io.IOException {
         return PARSER.parseFrom(input);
       }
-      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal parseFrom(
+      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return PARSER.parseFrom(input, extensionRegistry);
       }
-      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal parseDelimitedFrom(java.io.InputStream input)
+      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
         return PARSER.parseDelimitedFrom(input);
       }
-      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal parseDelimitedFrom(
+      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return PARSER.parseDelimitedFrom(input, extensionRegistry);
       }
-      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal parseFrom(
+      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
         return PARSER.parseFrom(input);
       }
-      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal parseFrom(
+      public static org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -1178,7 +1178,7 @@ public final class Proto {
 
       public static Builder newBuilder() { return Builder.create(); }
       public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder(org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal prototype) {
+      public static Builder newBuilder(org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic prototype) {
         return newBuilder().mergeFrom(prototype);
       }
       public Builder toBuilder() { return newBuilder(this); }
@@ -1190,25 +1190,25 @@ public final class Proto {
         return builder;
       }
       /**
-       * Protobuf type {@code org.yetiz.utils.cmds.messages.Message.Normal}
+       * Protobuf type {@code org.yetiz.utils.cmds.messages.Message.Generic}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:org.yetiz.utils.cmds.messages.Message.Normal)
-          org.yetiz.utils.cmds.messages.proto.Proto.Message.NormalOrBuilder {
+          // @@protoc_insertion_point(builder_implements:org.yetiz.utils.cmds.messages.Message.Generic)
+          org.yetiz.utils.cmds.messages.proto.Proto.Message.GenericOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return org.yetiz.utils.cmds.messages.proto.Proto.internal_static_org_yetiz_utils_cmds_messages_Message_Normal_descriptor;
+          return org.yetiz.utils.cmds.messages.proto.Proto.internal_static_org_yetiz_utils_cmds_messages_Message_Generic_descriptor;
         }
 
         protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return org.yetiz.utils.cmds.messages.proto.Proto.internal_static_org_yetiz_utils_cmds_messages_Message_Normal_fieldAccessorTable
+          return org.yetiz.utils.cmds.messages.proto.Proto.internal_static_org_yetiz_utils_cmds_messages_Message_Generic_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                  org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal.class, org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal.Builder.class);
+                  org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic.class, org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic.Builder.class);
         }
 
-        // Construct using org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal.newBuilder()
+        // Construct using org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic.newBuilder()
         private Builder() {
           maybeForceBuilderInitialization();
         }
@@ -1245,23 +1245,23 @@ public final class Proto {
 
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return org.yetiz.utils.cmds.messages.proto.Proto.internal_static_org_yetiz_utils_cmds_messages_Message_Normal_descriptor;
+          return org.yetiz.utils.cmds.messages.proto.Proto.internal_static_org_yetiz_utils_cmds_messages_Message_Generic_descriptor;
         }
 
-        public org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal getDefaultInstanceForType() {
-          return org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal.getDefaultInstance();
+        public org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic getDefaultInstanceForType() {
+          return org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic.getDefaultInstance();
         }
 
-        public org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal build() {
-          org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal result = buildPartial();
+        public org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic build() {
+          org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic result = buildPartial();
           if (!result.isInitialized()) {
             throw newUninitializedMessageException(result);
           }
           return result;
         }
 
-        public org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal buildPartial() {
-          org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal result = new org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal(this);
+        public org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic buildPartial() {
+          org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic result = new org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic(this);
           int from_bitField0_ = bitField0_;
           int to_bitField0_ = 0;
           if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1287,16 +1287,16 @@ public final class Proto {
         }
 
         public Builder mergeFrom(com.google.protobuf.Message other) {
-          if (other instanceof org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal) {
-            return mergeFrom((org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal)other);
+          if (other instanceof org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic) {
+            return mergeFrom((org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic)other);
           } else {
             super.mergeFrom(other);
             return this;
           }
         }
 
-        public Builder mergeFrom(org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal other) {
-          if (other == org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal.getDefaultInstance()) return this;
+        public Builder mergeFrom(org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic other) {
+          if (other == org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic.getDefaultInstance()) return this;
           if (other.hasId()) {
             setId(other.getId());
           }
@@ -1342,11 +1342,11 @@ public final class Proto {
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
-          org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal parsedMessage = null;
+          org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic parsedMessage = null;
           try {
             parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (org.yetiz.utils.cmds.messages.proto.Proto.Message.Normal) e.getUnfinishedMessage();
+            parsedMessage = (org.yetiz.utils.cmds.messages.proto.Proto.Message.Generic) e.getUnfinishedMessage();
             throw e;
           } finally {
             if (parsedMessage != null) {
@@ -1572,15 +1572,15 @@ public final class Proto {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:org.yetiz.utils.cmds.messages.Message.Normal)
+        // @@protoc_insertion_point(builder_scope:org.yetiz.utils.cmds.messages.Message.Generic)
       }
 
       static {
-        defaultInstance = new Normal(true);
+        defaultInstance = new Generic(true);
         defaultInstance.initFields();
       }
 
-      // @@protoc_insertion_point(class_scope:org.yetiz.utils.cmds.messages.Message.Normal)
+      // @@protoc_insertion_point(class_scope:org.yetiz.utils.cmds.messages.Message.Generic)
     }
 
     public interface ForwardOrBuilder extends
@@ -2808,10 +2808,10 @@ public final class Proto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_yetiz_utils_cmds_messages_Message_Broadcast_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_org_yetiz_utils_cmds_messages_Message_Normal_descriptor;
+    internal_static_org_yetiz_utils_cmds_messages_Message_Generic_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_org_yetiz_utils_cmds_messages_Message_Normal_fieldAccessorTable;
+      internal_static_org_yetiz_utils_cmds_messages_Message_Generic_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_org_yetiz_utils_cmds_messages_Message_Forward_descriptor;
   private static
@@ -2827,14 +2827,14 @@ public final class Proto {
   static {
     java.lang.String[] descriptorData = {
       "\n\024DefaultMessage.proto\022\035org.yetiz.utils." +
-      "cmds.messages\"\355\001\n\007Message\022\n\n\002id\030\001 \002(\003\0326\n" +
+      "cmds.messages\"\356\001\n\007Message\022\n\n\002id\030\001 \002(\003\0326\n" +
       "\tBroadcast\022\n\n\002id\030\001 \002(\003\022\014\n\004name\030\002 \002(\t\022\017\n\007" +
-      "message\030\003 \002(\014\032@\n\006Normal\022\n\n\002id\030\001 \002(\003\022\014\n\004n" +
-      "ame\030\002 \002(\t\022\013\n\003did\030\003 \003(\014\022\017\n\007message\030\004 \002(\014\032" +
-      "\\\n\007Forward\022\n\n\002id\030\001 \002(\003\022\014\n\004name\030\002 \002(\t\022\n\n\002" +
-      "rc\030\003 \002(\014\022\n\n\002lm\030\004 \001(\014\022\016\n\006device\030\005 \002(\014\022\017\n\007" +
-      "message\030\006 \002(\014B,\n#org.yetiz.utils.cmds.me" +
-      "ssages.protoB\005Proto"
+      "message\030\003 \002(\014\032A\n\007Generic\022\n\n\002id\030\001 \002(\003\022\014\n\004" +
+      "name\030\002 \002(\t\022\013\n\003did\030\003 \003(\014\022\017\n\007message\030\004 \002(\014" +
+      "\032\\\n\007Forward\022\n\n\002id\030\001 \002(\003\022\014\n\004name\030\002 \002(\t\022\n\n" +
+      "\002rc\030\003 \002(\014\022\n\n\002lm\030\004 \001(\014\022\016\n\006device\030\005 \002(\014\022\017\n" +
+      "\007message\030\006 \002(\014B,\n#org.yetiz.utils.cmds.m" +
+      "essages.protoB\005Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2860,11 +2860,11 @@ public final class Proto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_yetiz_utils_cmds_messages_Message_Broadcast_descriptor,
         new java.lang.String[] { "Id", "Name", "Message", });
-    internal_static_org_yetiz_utils_cmds_messages_Message_Normal_descriptor =
+    internal_static_org_yetiz_utils_cmds_messages_Message_Generic_descriptor =
       internal_static_org_yetiz_utils_cmds_messages_Message_descriptor.getNestedTypes().get(1);
-    internal_static_org_yetiz_utils_cmds_messages_Message_Normal_fieldAccessorTable = new
+    internal_static_org_yetiz_utils_cmds_messages_Message_Generic_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_org_yetiz_utils_cmds_messages_Message_Normal_descriptor,
+        internal_static_org_yetiz_utils_cmds_messages_Message_Generic_descriptor,
         new java.lang.String[] { "Id", "Name", "Did", "Message", });
     internal_static_org_yetiz_utils_cmds_messages_Message_Forward_descriptor =
       internal_static_org_yetiz_utils_cmds_messages_Message_descriptor.getNestedTypes().get(2);

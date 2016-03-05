@@ -11,25 +11,25 @@ import java.util.List;
  * cmds
  * Created by yeti on 16/3/5.
  */
-public class NormalMessage extends DefaultMessage {
+public class GenericMessage extends DefaultMessage {
     private String name;
 
     private List<byte[]> dids;
 
     private byte[] data;
 
-    private NormalMessage() {
+    private GenericMessage() {
     }
 
-    public NormalMessage(String name, List<byte[]> dids, byte[] data) {
+    public GenericMessage(String name, List<byte[]> dids, byte[] data) {
         this.name = name;
         this.dids = dids;
         this.data = data;
     }
 
-    public static NormalMessage from(byte[] data) {
+    public static GenericMessage from(byte[] data) {
         try {
-            Proto.Message.Normal message = Proto.Message.Normal.parseFrom(data);
+            Proto.Message.Generic message = Proto.Message.Generic.parseFrom(data);
             Builder builder = new Builder()
                 .id(message.getId())
                 .name(message.getName())
@@ -48,7 +48,7 @@ public class NormalMessage extends DefaultMessage {
 
     public byte[] toByteArray() {
         return
-            Proto.Message.Normal.newBuilder()
+            Proto.Message.Generic.newBuilder()
                 .setId(this.id())
                 .setName(this.name())
                 .setMessage(ByteString.copyFrom(this.data()))
@@ -75,7 +75,7 @@ public class NormalMessage extends DefaultMessage {
     }
 
     public static class Builder {
-        private NormalMessage message = new NormalMessage();
+        private GenericMessage message = new GenericMessage();
 
         public Builder id(long id) {
             this.message.id = id;
@@ -97,7 +97,7 @@ public class NormalMessage extends DefaultMessage {
             return this;
         }
 
-        public NormalMessage build() {
+        public GenericMessage build() {
             return this.message;
         }
     }
