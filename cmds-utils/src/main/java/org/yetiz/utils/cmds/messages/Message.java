@@ -1,4 +1,4 @@
-package org.yetiz.utils.cmds.message;
+package org.yetiz.utils.cmds.messages;
 
 /**
  * cmds

@@ -1,4 +1,4 @@
-package org.yetiz.utils.cmds.message;
+package org.yetiz.utils.cmds.messages;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -10,7 +10,7 @@ public class DefaultMessage implements Message {
 
     public static AtomicLong Counter = new AtomicLong(Long.MAX_VALUE - 1);
 
-    private long id;
+    protected long id;
 
     public DefaultMessage() {
         id = Counter.getAndUpdate(operand -> operand < Long.MAX_VALUE ? operand + 1 : 0);

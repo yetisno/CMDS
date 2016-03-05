@@ -3,6 +3,7 @@ package org.yetiz.utils.cmds;
 import org.yetiz.utils.cmds.exception.InvalidPermitNameException;
 import org.yetiz.utils.cmds.exception.InvalidValueException;
 import org.yetiz.utils.cmds.exception.ThisCannotOccurException;
+import org.yetiz.utils.cmds.utils.Check;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -20,21 +21,38 @@ public class PermitPair {
     private static final int NAME_SIZE = Long.BYTES;
     private static final int SERIAL_SIZE = Integer.BYTES;
     private static final int CHECKSUM_SIZE = 1;
-    private static final int BLOCK2_SIZE = 64;
-    private static final int BLOCK2_SECRET_SIZE = 32;
+    private static final int PAYLOAD_SIZE = 64;
+    private static final int SECRET_SIZE = 32;
     private String name;
     private int serial;
-    private byte[] block2;
+    private byte[] payload;
+    private byte[] secret;
 
-    public PermitPair(String name, byte[] data) {
-        Block1Check(data);
-        part1Decode(name, data);
+    public PermitPair(String name, byte[] data, byte[] secret) {
+        this.secret = secret;
+        block1Check(data);
+        block1Decode(name, data);
+        payloadDecode();
     }
 
-    private static void Block1Check(byte[] data) {
-        if (data.length != TOTAL_MAX) {
-            throw new InvalidValueException();
+    public PermitPair(String name, int serial, byte[] payload, byte[] secret) {
+        try {
+            Long.parseLong(name);
+        } catch (Throwable throwable) {
+            throw new InvalidPermitNameException();
         }
+
+        Check.byteLength(payload, PAYLOAD_SIZE, "payload");
+        Check.byteLength(secret, SECRET_SIZE, "secret");
+
+        this.name = name;
+        this.serial = serial;
+        this.payload = payload;
+        this.secret = secret;
+    }
+
+    private static void block1Check(byte[] data) {
+        Check.byteLength(data, TOTAL_MAX, "data");
 
         byte target = 0x00;
         for (int i = 0; i < TOTAL_MAX - CHECKSUM_SIZE; i++) {
@@ -46,7 +64,7 @@ public class PermitPair {
         }
     }
 
-    private void part1Decode(String name, byte[] data) {
+    private void block1Decode(String name, byte[] data) {
         byte secret = 0x00;
         byte[] nameData;
         try {
@@ -71,33 +89,45 @@ public class PermitPair {
 
         this.name = name;
         this.serial = ByteBuffer.wrap(result, NAME_SIZE, Integer.BYTES).order(ByteOrder.BIG_ENDIAN).getInt();
-        this.block2 = new byte[BLOCK2_SIZE];
+        this.payload = new byte[PAYLOAD_SIZE];
 
         for (int i = NAME_SIZE + SERIAL_SIZE; i < result.length; i++) {
-            this.block2[i - (NAME_SIZE + SERIAL_SIZE)] = result[i];
+            this.payload[i - (NAME_SIZE + SERIAL_SIZE)] = result[i];
         }
     }
 
-    public byte[] block2Decode(byte[] secret) {
-        if (secret.length != BLOCK2_SECRET_SIZE) {
-            throw new InvalidValueException();
-        }
+
+    private void payloadDecode() {
+        Check.byteLength(secret, SECRET_SIZE, "secret");
 
         SecretKey secretKey = new SecretKeySpec(secret, "Blowfish");
         try {
-            Cipher blowfish = Cipher.getInstance("Blowfish");
+            Cipher blowfish = Cipher.getInstance("Blowfish/ECB/NoPadding");
             blowfish.init(Cipher.DECRYPT_MODE, secretKey);
-            return blowfish.doFinal(this.block2);
+            this.payload = blowfish.doFinal(this.payload);
         } catch (Throwable throwable) {
             throw new ThisCannotOccurException();
         }
+    }
+
+    public PermitPair secret(byte[] secret) {
+        this.secret = secret;
+        return this;
+    }
+
+    public String name() {
+        return name;
     }
 
     public int serial() {
         return serial;
     }
 
-    public String name() {
-        return name;
+    public byte[] payload() {
+        return payload;
+    }
+
+    public byte[] secret() {
+        return secret;
     }
 }

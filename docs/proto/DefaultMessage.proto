@@ -1,0 +1,31 @@
+package org.yetiz.utils.cmds.messages;
+
+option java_package = "org.yetiz.utils.cmds.messages.proto";
+
+option java_outer_classname = "Proto";
+
+message Message {
+	required int64 id = 1;
+
+	message Broadcast {
+		required int64 id = 1;
+		required string name = 2;
+		required bytes message = 3;
+	}
+
+	message Normal {
+		required int64 id = 1;
+		required string name = 2;
+		repeated bytes did = 3;
+		required bytes message = 4;
+	}
+
+	message Forward {
+		required int64 id = 1;
+		required string name = 2;
+		required bytes rc = 3;
+		optional bytes lm = 4;
+		required bytes device = 5;
+		required bytes message = 6;
+	}
+}
