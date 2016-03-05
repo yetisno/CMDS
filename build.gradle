@@ -17,6 +17,13 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':cmds-utils')
+    compile project(':service-entry')
+    compile project('register')
+    compile project('location-manager')
+    compile project('region-cooperator')
+    compile project('inter-region-cooperator')
+    compile project('token-issuer')
+    compile project('name-examiner')
 }
 
 buildscript {
