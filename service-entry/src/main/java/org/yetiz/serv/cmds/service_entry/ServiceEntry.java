@@ -10,7 +10,7 @@ import org.yetiz.serv.cmds.service_entry.handler.ServiceEntryChannelInitializer;
 import org.yetiz.utils.cmds.exception.InvalidValueException;
 import org.yetiz.utils.cmds.service.ServerChannelWorkerConfig;
 import org.yetiz.utils.cmds.service.Service;
-import org.yetiz.utils.cmds.utils.Rund;
+import org.yetiz.utils.cmds.utils.Run;
 
 import java.util.Map;
 import java.util.Optional;
@@ -53,8 +53,8 @@ public class ServiceEntry implements Service {
                 .bind(port)
                 .sync()
                 .channel();
-        } catch (InterruptedException e) {
-            LoggerFactory.getLogger(getClass().getName()).error(e.getMessage());
+        } catch (Throwable throwable) {
+            LoggerFactory.getLogger(getClass().getName()).error(throwable.getMessage());
             return false;
         } finally {
             stop();
@@ -66,9 +66,9 @@ public class ServiceEntry implements Service {
     public boolean stop(Object... params) {
         try {
             Optional.ofNullable(channel).ifPresent(channel ->
-                Rund.withoutException(() -> channel.close()));
+                Run.withoutException(() -> channel.close()));
             Optional.ofNullable(serverChannelWorkerConfig).ifPresent(config ->
-                Rund.withoutException(() -> config.shutdownGracefully()));
+                Run.withoutException(() -> config.shutdownGracefully()));
         } catch (Throwable throwable) {
         } finally {
             return true;
