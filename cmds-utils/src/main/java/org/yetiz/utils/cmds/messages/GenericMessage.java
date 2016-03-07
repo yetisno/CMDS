@@ -18,10 +18,12 @@ public class GenericMessage extends DefaultMessage {
 
     private byte[] data;
 
-    private GenericMessage() {
+    protected GenericMessage() {
+        this.format = Format.Generic;
     }
 
     public GenericMessage(String name, List<byte[]> dids, byte[] data) {
+        this();
         this.name = name;
         this.dids = dids;
         this.data = data;

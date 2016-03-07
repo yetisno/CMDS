@@ -19,10 +19,12 @@ public class ForwardMessage extends DefaultMessage {
 
     private byte[] data;
 
-    private ForwardMessage() {
+    protected ForwardMessage() {
+        this.format = Format.Forward;
     }
 
     public ForwardMessage(String name, byte[] rc, byte[] lm, byte[] device, byte[] data) {
+        this();
         this.name = name;
         this.rc = rc;
         this.lm = lm;

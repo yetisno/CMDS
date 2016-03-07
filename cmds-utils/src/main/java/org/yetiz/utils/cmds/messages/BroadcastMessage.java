@@ -13,10 +13,12 @@ public class BroadcastMessage extends DefaultMessage {
 
     private byte[] data;
 
-    private BroadcastMessage() {
+    protected BroadcastMessage() {
+        this.format = Format.Broadcast;
     }
 
     public BroadcastMessage(String name, byte[] data) {
+        this();
         this.name = name;
         this.data = data;
     }

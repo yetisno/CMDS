@@ -6,10 +6,26 @@ package org.yetiz.utils.cmds.utils;
  */
 public class Run {
 
-    public static void withoutException(Runnable runnable) {
+    public static void withoutException(RunTask runTask) {
         try {
-            runnable.run();
+            runTask.run();
         } catch (Throwable throwable) {
         }
+    }
+
+    public static <T> T withoutException(RunGenericTask<T> runGenericTask) {
+        try {
+            return runGenericTask.run();
+        } catch (Throwable throwable) {
+        }
+
+        return null;
+    }
+
+    public interface RunTask extends Runnable {
+    }
+
+    public interface RunGenericTask<T> {
+        T run();
     }
 }

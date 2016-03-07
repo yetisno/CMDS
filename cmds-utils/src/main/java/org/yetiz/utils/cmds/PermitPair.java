@@ -51,6 +51,31 @@ public class PermitPair {
         this.secret = secret;
     }
 
+    public static void Check(String name, byte[] data) {
+        block1Check(data);
+        byte secret = 0x00;
+        byte[] nameData;
+        try {
+            nameData = ByteBuffer.allocate(Long.BYTES).putLong(Long.parseLong(name)).array();
+            for (int i = 0; i < nameData.length; i++) {
+                secret ^= nameData[i];
+            }
+        } catch (Throwable throwable) {
+            throw new InvalidPermitNameException();
+        }
+
+        byte[] result = new byte[TOTAL_MAX - CHECKSUM_SIZE];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = (byte) (data[i] ^ secret);
+        }
+
+        for (int i = 0; i < nameData.length; i++) {
+            if (nameData[i] != result[i]) {
+                throw new InvalidValueException();
+            }
+        }
+    }
+
     private static void block1Check(byte[] data) {
         Check.byteLength(data, TOTAL_MAX, "data");
 

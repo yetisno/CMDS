@@ -1,12 +1,16 @@
 package org.yetiz.utils.cmds.service;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOutboundHandler;
 import io.netty.channel.ChannelPromise;
 import io.netty.handler.codec.ReplayingDecoder;
 import io.netty.util.AttributeKey;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yetiz.utils.cmds.exception.DecodeFailException;
+import org.yetiz.utils.cmds.utils.Lazy;
 
 import java.net.SocketAddress;
 import java.util.List;
@@ -15,6 +19,7 @@ import java.util.List;
  * cmds
  * Created by yeti on 16/3/6.
  */
+@ChannelHandler.Sharable
 public class InterServiceStreamCodec extends ReplayingDecoder<InterServiceStreamCodec.State> implements
     ChannelOutboundHandler {
     private final static String KEY_TYPE_NAME = "D-TyPe";
@@ -24,6 +29,7 @@ public class InterServiceStreamCodec extends ReplayingDecoder<InterServiceStream
     private final static int HEADER_SIZE = TYPE_SIZE + LENGTH_SIZE;
     private final static AttributeKey<Type> KEY_TYPE = AttributeKey.<Type>newInstance(KEY_TYPE_NAME);
     private final static AttributeKey<Integer> KEY_LENGTH = AttributeKey.<Integer>newInstance(KEY_LENGTH_NAME);
+    private static Lazy<Logger> lazyLogger = Lazy.method(() -> LoggerFactory.getLogger(InterServiceStreamCodec.class));
 
     private static ByteBuf encode(ChannelHandlerContext ctx, ByteBuf in) {
         return ctx.channel()
@@ -44,6 +50,8 @@ public class InterServiceStreamCodec extends ReplayingDecoder<InterServiceStream
                         checkpoint(State.Length);
                         break;
                     default:
+                        lazyLogger.get().error("Error Decode Type, Close Channel.");
+                        ctx.channel().close();
                         throw new DecodeFailException("Jump into Error Type");
                 }
             case Length:
