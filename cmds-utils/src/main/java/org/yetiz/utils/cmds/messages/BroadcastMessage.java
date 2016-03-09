@@ -54,6 +54,11 @@ public class BroadcastMessage extends DefaultMessage {
         return data;
     }
 
+    @Override
+    public byte format() {
+        return 1;
+    }
+
     public static class Builder {
         private BroadcastMessage message = new BroadcastMessage();
 

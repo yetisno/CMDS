@@ -81,6 +81,11 @@ public class ForwardMessage extends DefaultMessage {
         return data;
     }
 
+    @Override
+    public byte format() {
+        return 3;
+    }
+
     public static class Builder {
         private ForwardMessage message = new ForwardMessage();
 

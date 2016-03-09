@@ -76,6 +76,11 @@ public class GenericMessage extends DefaultMessage {
         return dids;
     }
 
+    @Override
+    public byte format() {
+        return 2;
+    }
+
     public static class Builder {
         private GenericMessage message = new GenericMessage();
 
