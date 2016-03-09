@@ -1,6 +1,7 @@
 package org.yetiz.utils.cmds.messages;
 
 import org.reflections.Reflections;
+import org.yetiz.utils.cmds.exception.DecodeFailException;
 import org.yetiz.utils.cmds.exception.ThisCannotOccurException;
 
 import java.lang.reflect.Method;
@@ -34,6 +35,21 @@ public abstract class DefaultMessage implements Message {
 
     public DefaultMessage() {
         id = Counter.getAndUpdate(operand -> operand < Long.MAX_VALUE ? operand + 1 : 0);
+    }
+
+    public static DefaultMessage from(byte format, byte[] data) {
+        try {
+            Method method = MessageCreateMethodMaps.get(format);
+            if (method == null) {
+                throw new DecodeFailException("format doesn't existed.");
+            }
+
+            return (DefaultMessage) method.invoke(null, data);
+        } catch (DecodeFailException ex) {
+            throw ex;
+        } catch (Throwable throwable) {
+            throw new DecodeFailException(String.format("data can't decode by format[%d]", format));
+        }
     }
 
     public long id() {
