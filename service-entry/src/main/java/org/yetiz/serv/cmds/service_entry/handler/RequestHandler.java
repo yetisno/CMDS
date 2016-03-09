@@ -6,7 +6,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.*;
 import org.yetiz.utils.cmds.PermitPair;
 import org.yetiz.utils.cmds.service.CMDSChannelHandler;
-import org.yetiz.utils.cmds.utils.Run;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -62,16 +61,16 @@ public class RequestHandler extends CMDSChannelHandler {
             body = (ObjectNode) JsonMapper.readTree(data);
         }
 
-        // Get Name
-        final ObjectNode finalBody = body;
-        String project_id = Run.withoutException(() -> finalBody.get(RestParameter.project_id).toString());
-
-        // Check Secret With Name
+        PermitPair permitPair = null;
+        // Check Secret
         try {
-            PermitPair.Check(project_id, request.headers().get("Authorization").getBytes());
+            permitPair = new PermitPair(request.headers().get("Authorization").getBytes());
         } catch (Throwable throwable) {
             unAuthorized(ctx);
         }
+
+        // Get Name
+        String project_id = permitPair.name();
 
         // Classify Request Type (Broadcast, Generic)
         boolean isBroadcast = body.get(RestParameter.broadcast).asBoolean(false);
@@ -92,7 +91,6 @@ public class RequestHandler extends CMDSChannelHandler {
     }
 
     private class RestParameter {
-        private static final String project_id = "project_id";
         private static final String broadcast = "broadcast";
     }
 }
