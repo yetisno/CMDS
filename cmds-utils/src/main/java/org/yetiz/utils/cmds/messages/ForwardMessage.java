@@ -20,7 +20,6 @@ public class ForwardMessage extends DefaultMessage {
     private byte[] data;
 
     protected ForwardMessage() {
-        this.format = Format.Forward;
     }
 
     public ForwardMessage(String name, byte[] rc, byte[] lm, byte[] device, byte[] data) {
@@ -82,7 +81,7 @@ public class ForwardMessage extends DefaultMessage {
     }
 
     @Override
-    public byte format() {
+    public Byte format() {
         return 3;
     }
 

@@ -5,5 +5,5 @@ package org.yetiz.utils.cmds.messages;
  * Created by yeti on 16/3/5.
  */
 public interface Message {
-    byte format();
+    Byte format();
 }

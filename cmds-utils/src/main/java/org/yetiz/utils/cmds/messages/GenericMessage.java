@@ -19,7 +19,6 @@ public class GenericMessage extends DefaultMessage {
     private byte[] data;
 
     protected GenericMessage() {
-        this.format = Format.Generic;
     }
 
     public GenericMessage(String name, List<byte[]> dids, byte[] data) {
@@ -77,7 +76,7 @@ public class GenericMessage extends DefaultMessage {
     }
 
     @Override
-    public byte format() {
+    public Byte format() {
         return 2;
     }
 

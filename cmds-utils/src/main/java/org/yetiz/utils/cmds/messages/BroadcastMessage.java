@@ -14,7 +14,6 @@ public class BroadcastMessage extends DefaultMessage {
     private byte[] data;
 
     protected BroadcastMessage() {
-        this.format = Format.Broadcast;
     }
 
     public BroadcastMessage(String name, byte[] data) {
@@ -55,7 +54,7 @@ public class BroadcastMessage extends DefaultMessage {
     }
 
     @Override
-    public byte format() {
+    public Byte format() {
         return 1;
     }
 

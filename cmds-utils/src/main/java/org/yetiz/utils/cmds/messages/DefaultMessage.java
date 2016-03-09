@@ -1,5 +1,10 @@
 package org.yetiz.utils.cmds.messages;
 
+import org.reflections.Reflections;
+import org.yetiz.utils.cmds.exception.ThisCannotOccurException;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -8,33 +13,30 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public abstract class DefaultMessage implements Message {
 
+    private static final HashMap<Byte, Method> MessageCreateMethodMaps = new HashMap<>();
     public static AtomicLong Counter = new AtomicLong(Long.MAX_VALUE - 1);
-    protected Format format = Format.Undefined;
+
+    static {
+        new Reflections("")
+            .getSubTypesOf(DefaultMessage.class)
+            .stream()
+            .forEach(type -> {
+                try {
+                    DefaultMessage message = type.newInstance();
+                    MessageCreateMethodMaps.put(message.format(), type.getMethod("from", byte[].class));
+                } catch (Throwable throwable) {
+                    throw new ThisCannotOccurException();
+                }
+            });
+    }
+
     protected long id;
 
     public DefaultMessage() {
         id = Counter.getAndUpdate(operand -> operand < Long.MAX_VALUE ? operand + 1 : 0);
     }
 
-    public static DefaultMessage from(Format format, byte[] data) {
-        switch (format) {
-            case Undefined:
-                break;
-            case Generic:
-                return GenericMessage.from(data);
-            case Broadcast:
-                return BroadcastMessage.from(data);
-            case Forward:
-                return ForwardMessage.from(data);
-        }
-        return null;
-    }
-
     public long id() {
         return id;
-    }
-
-    public enum Format {
-        Undefined, Generic, Broadcast, Forward
     }
 }
