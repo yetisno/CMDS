@@ -1,4 +1,4 @@
-group 'org.yetiz.serv.cmds'
+group 'serv.cmds'
 version parent.version
 
 apply plugin: 'java'
