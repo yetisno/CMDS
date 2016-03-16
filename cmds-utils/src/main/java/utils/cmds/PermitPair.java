@@ -135,6 +135,10 @@ public class PermitPair {
             checksum ^= tmpData[i];
         }
 
+        for (int i = 0; i < tmpData.length; i++) {
+            tmpData[i] ^= checksum;
+        }
+
         return ByteBuffer.allocate(NAME_SIZE + PAYLOAD_SIZE + CHECKSUM_SIZE)
             .put(tmpData)
             .put(checksum)

@@ -13,17 +13,20 @@ public class PermitPairTest {
 
     @Test
     public void parse() throws Exception {
-//        String dataHex =
-//            "0000000000002AA44EF997456198DD784EF997456198DD784EF997456198DD784EF997456198DD784EF997456198DD784EF997456198DD784EF997456198DD784EF997456198DD788E";
-//        byte[] data = DatatypeConverter.parseHexBinary(dataHex);
-//        byte[] secret = DatatypeConverter.parseHexBinary
-//            ("0000000000000000000000000000000000000000000000000000000000000000");
-//        byte[] payload = DatatypeConverter.parseHexBinary
-//            ("00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
-//
-//        PermitPair permitPair = new PermitPair("10916", payload, secret);
-//        PermitPair enPermitPair = new PermitPair(data, secret);
-//        Assert.assertEquals(enPermitPair.name(), permitPair.name());
-//        Assert.assertArrayEquals(payload, permitPair.payload());
+        String dataHex =
+            "8E8E8E8E8E8EA42AC07719CBEF1653F6C07719CBEF1653F6C07719CBEF1653F6C07719CBEF1653F6C07719CBEF1653F6C07719CBEF1653F6C07719CBEF1653F6C07719CBEF1653F68E";
+        byte[] data = DatatypeConverter.parseHexBinary(dataHex);
+        byte[] secret = DatatypeConverter.parseHexBinary
+            ("0000000000000000000000000000000000000000000000000000000000000000");
+        byte[] payload = DatatypeConverter.parseHexBinary
+            ("00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+
+        PermitPair permitPair = new PermitPair("10916", payload, secret);
+        PermitPair enPermitPair = new PermitPair(data, secret);
+        permitPair.encode();
+
+        Assert.assertEquals(enPermitPair.name(), permitPair.name());
+        Assert.assertArrayEquals(enPermitPair.payload(), permitPair.payload());
+        Assert.assertArrayEquals(enPermitPair.secret(), permitPair.secret());
     }
 }
