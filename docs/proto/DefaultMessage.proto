@@ -1,6 +1,6 @@
-package org.yetiz.utils.cmds.messages;
+package utils.cmds.messages;
 
-option java_package = "org.yetiz.utils.cmds.messages.proto";
+option java_package = "utils.cmds.messages.proto";
 
 option java_outer_classname = "Proto";
 
@@ -28,4 +28,17 @@ message Message {
 		required bytes device = 5;
 		required bytes message = 6;
 	}
+
+	message Command {
+		required int64 id = 1;
+		required string name = 2;
+		repeated Pair pairs = 3;
+	}
+
+	message Pair {
+		required string key = 1;
+		required string value = 2;
+	}
 }
+
+// protoc -I=docs/proto --java_out=cmds-utils/src/main/java docs/proto/DefaultMessage.proto
